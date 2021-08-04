@@ -2,6 +2,7 @@ import http from 'http';
 import express from 'express';
 import logging from './config/logging';
 import config from './config/config';
+import sampleRoute, { route } from './routes/sample';
 
 const NAMESPACE = 'server';
 const router = express();
@@ -45,7 +46,7 @@ router.use((req, res, next) => {
 /**
  * Routes
  */
-
+router.use('/sample', sampleRoute);
 /** Error Handling */
 
 router.use((req, res, next) => {
