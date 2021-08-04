@@ -16,6 +16,8 @@ router.use((req, res, next) => {
     res.on('finish', () => {
         logging.info(NAMESPACE, `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}], STATUS - [${res.statusCode}]`);
     });
+
+    next();
 });
 
 /**
@@ -36,6 +38,8 @@ router.use((req, res, next) => {
         res.header('Access-Control-Allow-Methods', 'GET PATCH DELETE POST PUT');
         return res.status(200).json({});
     }
+
+    next();
 });
 
 /**
