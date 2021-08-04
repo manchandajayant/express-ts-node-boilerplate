@@ -6,9 +6,17 @@
   "scripts": {
     "build": "rm -rf build/ && prettier --write source/ && tsc"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manchandajayant/express-ts-node-boilerplate.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manchandajayant/express-ts-node-boilerplate/issues"
+  },
+  "homepage": "https://github.com/manchandajayant/express-ts-node-boilerplate#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "dotenv": "^10.0.0",
