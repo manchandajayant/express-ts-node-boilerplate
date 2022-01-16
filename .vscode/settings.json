@@ -5,7 +5,8 @@
     },
     "[typescript]": {
       "editor.formatOnSave": true,
-      "editor.formatOnPaste": true
+      "editor.formatOnPaste": true,
+      "editor.defaultFormatter": "remimarsal.prettier-now"
     },
     "[markdown]": {
       "editor.formatOnSave": true,

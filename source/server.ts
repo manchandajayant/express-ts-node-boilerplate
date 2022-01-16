@@ -2,7 +2,7 @@ import http from 'http';
 import express from 'express';
 import logging from './config/logging';
 import config from './config/config';
-import sampleRoute, { route } from './routes/sample';
+import sampleRoute from './routes/userRoute';
 
 const NAMESPACE = 'server';
 const router = express();
@@ -12,13 +12,17 @@ const router = express();
  */
 
 router.use((req, res, next) => {
-    logging.info(NAMESPACE, `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]`);
+	logging.info(NAMESPACE, `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]`);
 
-    res.on('finish', () => {
-        logging.info(NAMESPACE, `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}], STATUS - [${res.statusCode}]`);
-    });
+	res.on('finish', () => {
+		logging.info(
+			NAMESPACE,
+			`METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket
+				.remoteAddress}], STATUS - [${res.statusCode}]`
+		);
+	});
 
-    next();
+	next();
 });
 
 /**
@@ -32,29 +36,30 @@ router.use(express.json());
  * Rules of the API
  */
 router.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
-    if (req.method == 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'GET PATCH DELETE POST PUT');
-        return res.status(200).json({});
-    }
+	if (req.method == 'OPTIONS') {
+		res.header('Access-Control-Allow-Methods', 'GET PATCH DELETE POST PUT');
+		return res.status(200).json({});
+	}
 
-    next();
+	next();
 });
 
 /**
  * Routes
  */
-router.use('/sample', sampleRoute);
+router.use(sampleRoute);
+
 /** Error Handling */
 
 router.use((req, res, next) => {
-    const error = new Error('not found');
+	const error = new Error('not found');
 
-    return res.status(404).json({
-        message: error.message
-    });
+	return res.status(404).json({
+		message: error.message
+	});
 });
 
 /**
@@ -62,4 +67,6 @@ router.use((req, res, next) => {
  */
 
 const httpServer = http.createServer(router);
-httpServer.listen(config.server.port, () => logging.info(NAMESPACE, `Server running on ${config.server.hostname}:${config.server.port}`));
+httpServer.listen(config.server.port, () =>
+	logging.info(NAMESPACE, `Server running on http://${config.server.hostname}:${config.server.port}`)
+);
