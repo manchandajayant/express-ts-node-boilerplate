@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/manchandajayant/express-ts-node-boilerplate#readme",
   "dependencies": {
+    "@types/mysql": "^2.15.20",
     "dotenv": "^10.0.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.0",
